@@ -1,9 +1,11 @@
 import React , {useState} from 'react'
 import Todo from './Todo';
+import Todo1 from './Todo1';
 import TodoForm from './TodoForm'
 
-function TodoList() {
+function TodoList1() {
     const [todos , setTodos] = useState([]) ;
+    console.log("refresh is happening here we aware")
     
     const addTodo = (todo) => {
         if(!todo.text ){
@@ -32,16 +34,12 @@ function TodoList() {
 
     const completeTodo = id => {
         let updateTodos = todos.map(
-            (todo , index) =>  {
-                
-             console.log(todo.id + " " + id)
+            (todo , id) =>  {
                 if (todo.id === id) {
-                    console.log(todo.isComplete)
                 todo.isComplete = !todo.isComplete ; 
                 } 
                 return todo
             })
-            console.log("in complete todo")
 
         setTodos(updateTodos);
     }
@@ -49,14 +47,16 @@ function TodoList() {
         <>
             <h1> What's the plan today </h1>
             <TodoForm onSubmit={addTodo}/>
-            <Todo todos={todos} 
-            completeTodo={completeTodo} 
-            removeTodo={removeTodo} 
-            updateTodo={updateTodo}
-            setTodo = {setTodos}
-            />
+
+        {   todos.map( todo => {
+            
+            return  <Todo1 todo={todo} completeTodo={completeTodo} removeTodo={removeTodo} updateTodo={updateTodo}/>
+            
+            })
+        }
+            
         </>
     )
 }
-export default TodoList
+export default TodoList1
 

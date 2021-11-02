@@ -21,8 +21,30 @@ function TodoForm(props) {
             text : input 
         })
         setInput("");
+        
     }
-    return (
+    
+      {if (props.edit ){
+
+        return ( <form className="todo-form" onSubmit={submitHandler}>
+
+            <input 
+              onChange={inputChangeHandler}
+              type="text"
+              className="todo-input"
+              placeholder="add a todo" 
+              value={input} 
+              name="text" 
+              ref={inputRef}
+              className="todo-input"
+              />
+            <button className="todo-button" >  update </button> 
+
+
+        </form>)
+      }
+    else {
+      return (
         <form className="todo-form" onSubmit={submitHandler}>
 
             <input 
@@ -39,7 +61,12 @@ function TodoForm(props) {
 
 
         </form>
-    )
+
+      )
+    }
+    
+    }
+    
 }
 
 export default TodoForm
